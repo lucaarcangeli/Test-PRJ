@@ -44,4 +44,19 @@ public class LocationDaoImpl extends GenericDaoImpl implements LocationDao {
 			em.close();
 		}
 	}
+
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.project.test.dao.location.LocationDao#insertLocation(com.project.test.model.TLocation)
+	 */
+	@Override
+	public void insertLocation(TLocation location) {
+		EntityManager em = emf.createEntityManager();
+		try {
+			em.persist(location);
+		} finally {
+			em.close();
+		}
+	}
 }

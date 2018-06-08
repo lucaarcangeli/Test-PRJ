@@ -30,12 +30,16 @@ public interface UserEjbLocal {
 
 	/**
 	 * @author Luca Arcangeli (luca.arcangeli@gmail.com)
+	 * @param user
+	 *            TUser object entity to insert
 	 */
 	public void addUser(TUser user);
 
 
 	/**
 	 * @author Luca Arcangeli (luca.arcangeli@gmail.com)
+	 * @param user
+	 *            TUser object entity to update
 	 */
 	public void updateUser(TUser user);
 }

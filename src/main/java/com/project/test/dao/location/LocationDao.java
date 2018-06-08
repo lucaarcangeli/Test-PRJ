@@ -27,4 +27,12 @@ public interface LocationDao extends GenericDao {
 	 * @return List of TUser object entity
 	 */
 	public List<TLocation> fetchByArea(Double latNE, Double lngNE, Double latSW, Double lngSW, Long timeFrom, Long timeTo);
+
+
+	/**
+	 * @author Luca Arcangeli (luca.arcangeli@gmail.com)
+	 * @param location
+	 *            TLocation object entity to update
+	 */
+	public void insertLocation(TLocation location);
 }

@@ -38,4 +38,14 @@ public class LocationEjb implements LocationEjbLocal {
 	public List<TLocation> fetchByArea(Double latNE, Double lngNE, Double latSW, Double lngSW, Long timeFrom, Long timeTo) {
 		return dao.fetchByArea(latNE, lngNE, latSW, lngSW, timeFrom, timeTo);
 	}
+
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.project.test.service.location.LocationEjbLocal#insertLocation(com.project.test.model.TLocation)
+	 */
+	@Override
+	public void insertLocation(TLocation location) {
+		dao.insertLocation(location);
+	}
 }
