@@ -106,7 +106,11 @@ public class UserController {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response auth(UserNtt userNtt) {
 
-		Assert.isNotNull(userNtt.getUsername(), "Username cannot be null or empty");
+		try {
+			Assert.isNotNull(userNtt.getUsername(), "Username cannot be null or empty");
+		} catch (Exception e) {
+			throw new WebApplicationException(Response.status(Status.BAD_REQUEST.getStatusCode(), "Invalid or missing service mandatory JSON request fields").build());
+		}
 
 		TUser user = userEjb.getByUsername(userNtt.getUsername());
 
