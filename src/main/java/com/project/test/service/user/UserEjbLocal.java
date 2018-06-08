@@ -12,15 +12,6 @@ public interface UserEjbLocal {
 
 	/**
 	 * @author Luca Arcangeli (luca.arcangeli@gmail.com)
-	 * @param userId
-	 *            Unique user ID
-	 * @return TUser object entity
-	 */
-	public TUser getById(Long userId);
-
-
-	/**
-	 * @author Luca Arcangeli (luca.arcangeli@gmail.com)
 	 * @param username
 	 *            Unique user username
 	 * @return TUser object entity

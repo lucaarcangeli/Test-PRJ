@@ -30,15 +30,6 @@ public class UserEjb implements UserEjbLocal {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.j2ee.service.user.UserEjbLocal#getHello(java.lang.String)
-	 */
-	public TUser getById(Long userId) {
-		return dao.getById(userId);
-	}
-
-
-	/*
-	 * (non-Javadoc)
 	 * @see com.project.test.service.user.UserEjbLocal#getByUsername(java.lang.String)
 	 */
 	@Override

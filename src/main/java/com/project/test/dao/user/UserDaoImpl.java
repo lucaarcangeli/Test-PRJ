@@ -24,21 +24,6 @@ public class UserDaoImpl extends GenericDaoImpl implements UserDao {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.j2ee.service.user.UserEjbLocal#getHello(java.lang.String)
-	 */
-	public TUser getById(Long userId) {
-		EntityManager em = emf.createEntityManager();
-		try {
-			TypedQuery<TUser> query = em.createNamedQuery("TUser.findById", TUser.class);
-			return query.setParameter("id", userId).getSingleResult();
-		} finally {
-			em.close();
-		}
-	}
-
-
-	/*
-	 * (non-Javadoc)
 	 * @see com.project.test.dao.impl.UserDao#getByUsername(java.lang.String)
 	 */
 	@Override

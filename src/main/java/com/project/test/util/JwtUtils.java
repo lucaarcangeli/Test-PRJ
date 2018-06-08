@@ -34,7 +34,6 @@ public class JwtUtils {
 		jwToken.setAudience("WEB");
 		jwToken.setIssuedAt(new Date());
 		jwToken.setId(UUID.randomUUID().toString());
-		jwToken.claim("userId", user.getId());
 
 		String token = jwToken.compressWith(new GzipCompressionCodec()).signWith(SignatureAlgorithm.HS512, JWT_AUTH_KEY).compact();
 

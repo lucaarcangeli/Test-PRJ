@@ -62,7 +62,7 @@ public class UserController {
 	 *            User specific name
 	 */
 	@POST
-	@Path("username/{username}/toggle")
+	@Path("toggle/{username}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response toggleActive(@PathParam("username") String username) {
 		TUser user = userEjb.getByUsername(username);
@@ -81,7 +81,7 @@ public class UserController {
 	 * @return DTO formatter object wrapper
 	 */
 	@GET
-	@Path("byarea")
+	@Path("list")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<TUser> getUsersIntoArea(
 			@QueryParam("latNE") Double latNE,
@@ -161,16 +161,15 @@ public class UserController {
 			throw new WebApplicationException(Response.status(Status.UNAUTHORIZED.getStatusCode(), "Invalid user authentication schema").build());
 		}
 
-		Long userId = null;
+		Claims parseToken = null;
 		try {
-			Claims parseToken = JwtUtils.parseToken(authDetails[1]);
-			userId = parseToken.get("userId", Long.class);
+			parseToken = JwtUtils.parseToken(authDetails[1]);
 		} catch (Exception e) {
 			throw new WebApplicationException(Response.status(Status.UNAUTHORIZED.getStatusCode(), "Invalid user authentication token").build());
 		}
 
 		TLocation location = new TLocation();
-		location.setUser(userEjb.getById(userId));
+		location.setUser(userEjb.getByUsername(parseToken.getSubject()));
 		location.setLat(locationNtt.getLat());
 		location.setLng(locationNtt.getLng());
 		location.setInsdate(Instant.now().toEpochMilli() / 1000);
@@ -189,18 +188,5 @@ public class UserController {
 		locationEjb.insertLocation(location);
 
 		return Response.status(Status.OK).entity(location).build();
-	}
-
-
-	/**
-	 * @author Luca Arcangeli (luca.arcangeli@gmail.com)
-	 * @param username
-	 *            User specific name
-	 */
-	@GET
-	@Path("/{userId}")
-	@Produces({ MediaType.APPLICATION_JSON })
-	public TUser getByUserId(@PathParam("userId") Long userId) {
-		return userEjb.getById(userId);
 	}
 }
