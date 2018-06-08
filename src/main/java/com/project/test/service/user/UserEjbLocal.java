@@ -1,7 +1,5 @@
 package com.project.test.service.user;
 
-import java.util.List;
-
 import javax.ejb.Local;
 
 import com.project.test.model.TUser;
@@ -28,13 +26,6 @@ public interface UserEjbLocal {
 	 * @return TUser object entity
 	 */
 	public TUser getByUsername(String username);
-
-
-	/**
-	 * @author Luca Arcangeli (luca.arcangeli@gmail.com)
-	 * @return List of all TUser entities
-	 */
-	public List<TUser> getAllUser();
 
 
 	/**

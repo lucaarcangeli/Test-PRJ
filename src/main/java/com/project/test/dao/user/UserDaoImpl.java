@@ -1,6 +1,4 @@
-package com.project.test.dao.impl;
-
-import java.util.List;
+package com.project.test.dao.user;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -49,22 +47,6 @@ public class UserDaoImpl extends GenericDaoImpl implements UserDao {
 		try {
 			TypedQuery<TUser> query = em.createNamedQuery("TUser.findByUsername", TUser.class);
 			return query.setParameter("username", username).getSingleResult();
-		} finally {
-			em.close();
-		}
-	}
-
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.j2ee.service.user.UserEjbLocal#getUsernameList()
-	 */
-	@Override
-	public List<TUser> getAllUser() {
-		EntityManager em = emf.createEntityManager();
-		try {
-			TypedQuery<TUser> query = em.createNamedQuery("TUser.findAll", TUser.class);
-			return query.getResultList();
 		} finally {
 			em.close();
 		}

@@ -1,6 +1,4 @@
-package com.project.test.dao.impl;
-
-import java.util.List;
+package com.project.test.dao.user;
 
 import com.project.test.dao.GenericDao;
 import com.project.test.model.TUser;
@@ -26,13 +24,6 @@ public interface UserDao extends GenericDao {
 	 * @return TUser object entity
 	 */
 	public TUser getByUsername(String username);
-
-
-	/**
-	 * @author Luca Arcangeli (luca.arcangeli@gmail.com)
-	 * @return List of all TUser entities
-	 */
-	public List<TUser> getAllUser();
 
 
 	/**

@@ -1,14 +1,12 @@
 package com.project.test.service.user;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import com.project.test.dao.DaoFactory;
-import com.project.test.dao.impl.UserDao;
+import com.project.test.dao.user.UserDao;
 import com.project.test.model.TUser;
 
 /**
@@ -46,16 +44,6 @@ public class UserEjb implements UserEjbLocal {
 	@Override
 	public TUser getByUsername(String username) {
 		return dao.getByUsername(username);
-	}
-
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.j2ee.service.user.UserEjbLocal#getUsernameList()
-	 */
-	@Override
-	public List<TUser> getAllUser() {
-		return dao.getAllUser();
 	}
 
 

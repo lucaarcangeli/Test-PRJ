@@ -1,7 +1,5 @@
 package com.project.test.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "LOCATION")
 @NamedQueries({
-	@NamedQuery(name = "TLocation.findById", query = "SELECT l FROM TLocation l WHERE l.id = :id")
+		@NamedQuery(name = "TLocation.findByGSArea", query = "SELECT l FROM TLocation l WHERE (l.lat BETWEEN :latMin AND :latMax) AND (l.lng BETWEEN :lngMin AND :lngMax) AND (l.insdate BETWEEN :tMin AND :tMax) ORDER BY l.insdate")
 })
 
 public class TLocation {
@@ -28,7 +26,7 @@ public class TLocation {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "UUID")
+	@JoinColumn(name = "UID")
 	private TUser user;
 
 	@Column(name = "LAT")
@@ -38,7 +36,7 @@ public class TLocation {
 	private Double lng;
 
 	@Column(name = "INSDATE")
-	private Date insdate;
+	private Long insdate;
 
 
 	/**
@@ -112,7 +110,7 @@ public class TLocation {
 	/**
 	 * @return the insdate
 	 */
-	public Date getInsdate() {
+	public Long getInsdate() {
 		return insdate;
 	}
 
@@ -121,7 +119,7 @@ public class TLocation {
 	 * @param insdate
 	 *            the insdate to set
 	 */
-	public void setInsdate(Date insdate) {
+	public void setInsdate(Long insdate) {
 		this.insdate = insdate;
 	}
 }
