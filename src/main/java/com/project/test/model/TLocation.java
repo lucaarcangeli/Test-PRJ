@@ -39,6 +39,9 @@ public class TLocation {
 	@Column(name = "INSDATE")
 	private Long insdate;
 
+	@Column(name = "GEOCODED")
+	private String geocoded;
+
 
 	/**
 	 * @return the id
@@ -122,5 +125,22 @@ public class TLocation {
 	 */
 	public void setInsdate(Long insdate) {
 		this.insdate = insdate;
+	}
+
+
+	/**
+	 * @return the geocoded
+	 */
+	public String getGeocoded() {
+		return geocoded;
+	}
+
+
+	/**
+	 * @param geocoded
+	 *            the geocoded to set
+	 */
+	public void setGeocoded(String geocoded) {
+		this.geocoded = geocoded;
 	}
 }

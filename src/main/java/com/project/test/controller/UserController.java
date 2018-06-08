@@ -1,5 +1,6 @@
 package com.project.test.controller;
 
+import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,11 +25,13 @@ import javax.ws.rs.core.Response.Status;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.persistence.jpa.jpql.Assert;
 
+import com.google.maps.errors.ApiException;
 import com.project.test.controller.dto.AuthTokenDto;
 import com.project.test.controller.ntt.LocationNtt;
 import com.project.test.controller.ntt.UserNtt;
 import com.project.test.model.TLocation;
 import com.project.test.model.TUser;
+import com.project.test.service.google.GoogleEjb;
 import com.project.test.service.location.LocationEjb;
 import com.project.test.service.user.UserEjb;
 import com.project.test.util.JwtUtils;
@@ -48,6 +51,9 @@ public class UserController {
 
 	@EJB
 	private LocationEjb locationEjb;
+
+	@EJB
+	private GoogleEjb googleEjb;
 
 
 	/**
@@ -134,6 +140,7 @@ public class UserController {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response auth(@HeaderParam("Authorization") String authorization,
+			@QueryParam("googleApiKey") String key,
 			LocationNtt locationNtt) throws AuthenticationException {
 
 		try {
@@ -168,11 +175,20 @@ public class UserController {
 		location.setLng(locationNtt.getLng());
 		location.setInsdate(Instant.now().toEpochMilli() / 1000);
 
-		locationEjb.insertLocation(location);
+		if (key != null) {
+			try {
+				String address = googleEjb.reverseGeocoding(locationNtt.getLat(), locationNtt.getLng(), key);
+				location.setGeocoded(address);
+			} catch (InterruptedException | ApiException | IOException e) {
+				logger.log(Level.WARNING, "Google API reverse geocoding failed for LATLNG=[" + locationNtt.getLat() + ", " + locationNtt.getLng() + "]");
+			}
+		}
 
 		logger.log(Level.INFO, "New location point for authenticated user " + location.getUser().getUsername() + " inserted succesfully LATLNG=[" + locationNtt.getLat() + ", " + locationNtt.getLng() + "]");
 
-		return Response.status(Status.OK).entity("").build();
+		locationEjb.insertLocation(location);
+
+		return Response.status(Status.OK).entity(location).build();
 	}
 
 
