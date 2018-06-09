@@ -72,10 +72,11 @@
 			<version>3.1.0</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
+
 	<build>
-		<finalName>testprj</finalName>
+		<finalName>testprj-${project.version}</finalName>
 	</build>
+
 </project>

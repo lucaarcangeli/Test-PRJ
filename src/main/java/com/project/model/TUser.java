@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * @author Luca Arcangeli (luca.arcangeli@gmail.com)
  */
 @Entity
-@Table(name = "USER")
+@Table(name = "user")
 @NamedQueries({
 		@NamedQuery(name = "TUser.findAll", query = "SELECT u FROM TUser u ORDER BY u.id"),
 		@NamedQuery(name = "TUser.findById", query = "SELECT u FROM TUser u WHERE u.id = :id"),
@@ -25,16 +25,16 @@ public class TUser {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "USERNAME")
+	@Column(name = "username")
 	private String username;
 
-	@Column(name = "FIRSTNAME")
+	@Column(name = "firstname")
 	private String firstname;
 
-	@Column(name = "LASTNAME")
+	@Column(name = "lastname")
 	private String lastname;
 
-	@Column(name = "ACTIVE")
+	@Column(name = "active")
 	private Boolean active;
 
 

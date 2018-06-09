@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * @author Luca Arcangeli (luca.arcangeli@gmail.com)
  */
 @Entity
-@Table(name = "LOCATION")
+@Table(name = "location")
 @NamedQueries({
 		@NamedQuery(name = "TLocation.findByGSArea", query = "SELECT l FROM TLocation l WHERE (l.lat BETWEEN :latMin AND :latMax) AND (l.lng BETWEEN :lngMin AND :lngMax) AND (l.insdate BETWEEN :tMin AND :tMax) ORDER BY l.insdate")
 })
@@ -27,19 +27,19 @@ public class TLocation {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "UID")
+	@JoinColumn(name = "uid")
 	private TUser user;
 
-	@Column(name = "LAT")
+	@Column(name = "lat")
 	private Double lat;
 
-	@Column(name = "LNG")
+	@Column(name = "lng")
 	private Double lng;
 
-	@Column(name = "INSDATE")
+	@Column(name = "insdate")
 	private Long insdate;
 
-	@Column(name = "GEOCODED")
+	@Column(name = "geocoded")
 	private String geocoded;
 
 
