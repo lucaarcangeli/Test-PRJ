@@ -12,7 +12,7 @@ Soluzione progetto test per candidatura J2EE Senior basata su archetipo Maven (J
 $ git clone git@github.com:lucaarcangeli/Test-PRJ.git Test-PRJ
 $ cd Test-PRJ
 $ git checkout master
-$ mvn clean package
+$ mvn clean package -DskipTests=true
 ```
 
 _Le specifiche J2EE 6 ammettono la generazione di un WAR al cui interno siano contenuti anche gli EJB (non è più necessario creare un EAR). L'archtipo Maven si comporta seguendo questo schema._
