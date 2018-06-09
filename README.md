@@ -37,4 +37,4 @@ Pubblicata via Postman all'indirizzo: https://documenter.getpostman.com/view/602
 
 ### Note
 I sorgenti del progetto comprendono:
-* **directory DDL:** contiene gli script SQL utilzizati per aggiornare la struttura dati fornita, in base a quanto resosi necessario.
+* **directory DDL:** contiene gli script SQL utilizzati per aggiornare la struttura dati fornita, in base a quanto resosi necessario.
