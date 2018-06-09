@@ -76,7 +76,7 @@
 
 
 	<build>
-		<finalName>testprj-${project.version}</finalName>
+		<finalName>testprj</finalName>
 	</build>
 
 </project>
