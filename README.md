@@ -18,7 +18,7 @@ $ mvn clean package
 _Le specifiche J2EE 6 ammettono la generazione di un WAR al cui interno siano contenuti anche gli EJB (non è più necessario creare un EAR). L'archtipo Maven si comporta seguendo questo schema._
 
 ### Deploy
-Il file di cui eseguire il deploy mendiante interfaccia ADMIN del server è il seguente:
+Il file di cui eseguire il deploy:
 
 ```sh
 $ Test-PRJ/target/testprj.war
