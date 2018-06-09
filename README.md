@@ -14,7 +14,7 @@ $ cd Test-PRJ
 $ git checkout master
 $ mvn clean package -DskipTests=true
 ```
-_Nota: a partire dalle specifiche J2EE 6 si ammette la generazione di un WAR al cui interno siano contenuti anche gli EJB (non è più necessario creare un EAR). L'archtipo Maven sul quale si basa l'intero progetto si comporta seguendo questo schema._
+_Nota: a partire dalle specifiche J2EE 6 si ammette la generazione di un WAR al cui interno siano contenuti anche gli EJB (non è più necessario creare un EAR). L'archetipo Maven sul quale si basa l'intero progetto si comporta seguendo questo schema._
 
 ### Esecuzione test-cases
 
