@@ -22,7 +22,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.lang.StringUtils;
-import org.eclipse.persistence.jpa.jpql.Assert;
 
 import com.google.maps.errors.ApiException;
 import com.project.controller.dto.AuthTokenDto;
@@ -64,10 +63,9 @@ public class UserController {
 	@Path("toggle")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response toggleActive(UserNtt userNtt) {
-		try {
-			Assert.isNotNull(userNtt.getUsername(), "Username cannot be null or empty");
-		} catch (Exception e) {
-			throw new WebApplicationException(Response.status(Status.BAD_REQUEST.getStatusCode(), "Invalid or missing service mandatory JSON request fields").build());
+
+		if (StringUtils.isEmpty(userNtt.getUsername()) || StringUtils.isBlank(userNtt.getUsername())) {
+			throw new WebApplicationException(Response.status(Status.BAD_REQUEST.getStatusCode(), "Invalid or missing mandatory JSON request fields").build());
 		}
 
 		TUser user = userEjb.getByUsername(userNtt.getUsername());
@@ -96,6 +94,10 @@ public class UserController {
 			@QueryParam("timeFrom") Long timeFrom,
 			@QueryParam("timeTo") Long timeTo) {
 
+		if (latNE == null || lngNE == null || latSW == null || lngSW == null || timeFrom == null || timeTo == null) {
+			throw new WebApplicationException(Response.status(Status.BAD_REQUEST.getStatusCode(), "Invalid or missing mandatory request param").build());
+		}
+
 		List<TUser> collect = locationEjb.fetchByArea(latNE, lngNE, latSW, lngSW, timeFrom, timeTo).stream()
 				.map(l -> l.getUser())
 				.collect(Collectors.toList());
@@ -117,9 +119,7 @@ public class UserController {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response auth(UserNtt userNtt) {
 
-		try {
-			Assert.isNotNull(userNtt.getUsername(), "Username cannot be null or empty");
-		} catch (Exception e) {
+		if (StringUtils.isEmpty(userNtt.getUsername()) || StringUtils.isBlank(userNtt.getUsername())) {
 			throw new WebApplicationException(Response.status(Status.BAD_REQUEST.getStatusCode(), "Invalid or missing service mandatory JSON request fields").build());
 		}
 
@@ -148,16 +148,11 @@ public class UserController {
 			@QueryParam("googleApiKey") String key,
 			LocationNtt locationNtt) throws AuthenticationException {
 
-		try {
-			Assert.isNotNull(locationNtt.getLat(), "User location latitude cannot be null or empty");
-			Assert.isNotNull(locationNtt.getLng(), "User location logintude cannot be null or empty");
-		} catch (Exception e) {
+		if (locationNtt.getLat() == null || locationNtt.getLng() == null) {
 			throw new WebApplicationException(Response.status(Status.BAD_REQUEST.getStatusCode(), "Invalid or missing service mandatory JSON request fields").build());
 		}
 
-		try {
-			Assert.isNotNull(authorization, "Authorization header param cannot be null or empty");
-		} catch (Exception e) {
+		if (StringUtils.isEmpty(authorization) || StringUtils.isBlank(authorization)) {
 			throw new WebApplicationException(Response.status(Status.UNAUTHORIZED.getStatusCode(), "Invalid user authentication schema").build());
 		}
 
@@ -179,6 +174,7 @@ public class UserController {
 		location.setLng(locationNtt.getLng());
 		location.setInsdate(Instant.now().toEpochMilli() / 1000);
 
+		// CHECK for Google API key and perform reverse Geocoding...
 		if (key != null) {
 			try {
 				String address = googleEjb.reverseGeocoding(locationNtt.getLat(), locationNtt.getLng(), key);
