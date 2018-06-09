@@ -21,7 +21,7 @@ _Le specifiche J2EE 6 ammettono la generazione di un WAR al cui interno siano co
 Il file di cui eseguire il deploy mendiante interfaccia ADMIN del server è il seguente:
 
 ```sh
-$ Test-PRJ/target/testprj-1.0.0.war
+$ Test-PRJ/target/testprj.war
 ```
 
 ### Documentazione API
