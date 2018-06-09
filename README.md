@@ -14,6 +14,7 @@ $ cd Test-PRJ
 $ git checkout master
 $ mvn clean package -DskipTests=true
 ```
+_Nota: a partire dalle specifiche J2EE 6 si ammette la generazione di un WAR al cui interno siano contenuti anche gli EJB (non è più necessario creare un EAR). L'archtipo Maven sul quale si basa l'intero progetto si comporta seguendo questo schema._
 
 ### Esecuzione test-cases
 
@@ -22,7 +23,7 @@ $ cd Test-PRJ
 $ mvn test
 ```
 
-_I test-case implementati fanno riferimento ad una installazione dell'applicazione in locale, su localhost:8080_
+_Nota: I test-case implementati fanno riferimento ad una installazione che risponda all'URL localhost:8080_
 
 ### Deploy
 Il file di cui eseguire il deploy:
